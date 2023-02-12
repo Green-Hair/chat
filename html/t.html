@@ -15,9 +15,10 @@
     <body>
         <div id="example1" class="demo">
             <input v-model="color" type="checkbox">
-            <button cilnk="l()">abc</button>
+            <button @click="pf">abc</button>
             <p>使用 v-html 指令: <span v-html="rawHtml"></span></p>
             <p v-bind:class="{'p': color}">{{name}}</p>
+            <h1>---{{color ? 'SB':''}}---</h1>
         </div>
          
         <script>
@@ -35,9 +36,6 @@
             }
           }
         }).mount('#example1')
-        function l(){
-            vue.pf()
-        }
         </script>
     </body>
 </html>
