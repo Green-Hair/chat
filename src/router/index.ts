@@ -11,9 +11,9 @@ const routes = [
     component: () => import("@/views/HomeView.vue"),
   },
   {
-    path: "/register",
-    name: "register",
-    component: () => import("@/views/RegisterView.vue"),
+    path: "/auth",
+    name: "auth",
+    component: () => import("@/views/AuthView.vue"),
   },
   {
     path: "/chat",

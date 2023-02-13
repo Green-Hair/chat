@@ -39,7 +39,9 @@ export default {
   },
   methods: {
     // 登录注册
-    toggleAuthModal() {},
+    toggleAuthModal() {
+      this.$router.push({ name: "auth" });
+    },
     // 登出
     signOut() {
       this.userStore.signOut();
