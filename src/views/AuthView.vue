@@ -20,12 +20,56 @@
         class="inline-block align-bottom text-left shadow-2xl transform transition-all sm:align-middle w-3/4 h-5/6"
       >
         <div class="flex h-full auth">
+          <!-- 特性轮播组件 -->
           <FeatureCard class="w-1/2 h-full rounded-tl-xl rounded-bl-xl" />
-          <LoginForm
-            class="w-1/2 rounded-tr-xl rounded-br-xl"
-            v-if="tab === 'login'"
-          />
-          <RegisterForm class="w-1/2 rounded-tr-xl rounded-br-xl" v-else />
+          <!-- 登录注册组件 -->
+          <div class="w-1/2 rounded-tr-xl rounded-br-xl authb">
+            <div class="text-white my-5 mr-5 text-right">
+              <button
+                @click.prevent="tab = 'login'"
+                class="px-5 py-1 rounded-l-full"
+                :style="
+                  tab == 'login'
+                    ? 'background: linear-gradient(#53d9c5, #38c1b6)'
+                    : 'background: linear-gradient(#495c6f, #495b6f)'
+                "
+              >
+                登录
+              </button>
+              <button
+                @click.prevent="tab = 'register'"
+                class="px-5 py-1 rounded-r-full"
+                :style="
+                  tab == 'register'
+                    ? 'background: linear-gradient(#53d9c5, #38c1b6)'
+                    : 'background: linear-gradient(#495c6f, #495b6f)'
+                "
+              >
+                注册
+              </button>
+            </div>
+            <div class="text-white mt-12 mb-10 flex items-baseline px-16">
+              <div
+                class="text-2xl"
+                :class="
+                  tab == 'login' ? 'border-b sauth' : 'border-none  tauth'
+                "
+              >
+                Sign In
+              </div>
+              <div class="mx-4 tauth">Or</div>
+              <div
+                class="text-2xl"
+                :class="
+                  tab == 'register' ? 'border-b sauth' : 'border-none tauth'
+                "
+              >
+                Sign Up
+              </div>
+            </div>
+            <LoginForm v-if="tab === 'login'" />
+            <RegisterForm v-else />
+          </div>
         </div>
       </div>
     </div>
@@ -49,3 +93,15 @@ export default {
   },
 };
 </script>
+<style scoped>
+.authb {
+  background: linear-gradient(#374a61, #212e41);
+}
+.sauth {
+  border-bottom-color: #00c9a8;
+  padding-bottom: 5px;
+}
+.tauth {
+  color: #677685;
+}
+</style>
