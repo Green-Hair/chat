@@ -11,7 +11,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@icon-park/vue-next": "^1.4.2",
+    "@vee-validate/rules": "^4.7.4",
     "pinia": "^2.0.28",
+    "vee-validate": "^4.7.4",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
