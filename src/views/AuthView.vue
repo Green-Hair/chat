@@ -28,22 +28,14 @@
               <button
                 @click.prevent="tab = 'login'"
                 class="px-5 py-1 rounded-l-full"
-                :style="
-                  tab == 'login'
-                    ? 'background: linear-gradient(#53d9c5, #38c1b6)'
-                    : 'background: linear-gradient(#495c6f, #495b6f)'
-                "
+                :class="tab == 'login' ? 'bauth' : 'bauthf'"
               >
                 登录
               </button>
               <button
                 @click.prevent="tab = 'register'"
                 class="px-5 py-1 rounded-r-full"
-                :style="
-                  tab == 'register'
-                    ? 'background: linear-gradient(#53d9c5, #38c1b6)'
-                    : 'background: linear-gradient(#495c6f, #495b6f)'
-                "
+                :class="tab == 'register' ? 'bauth' : 'bauthf'"
               >
                 注册
               </button>
@@ -103,5 +95,13 @@ export default {
 }
 .tauth {
   color: #677685;
+}
+.bauth {
+  background: linear-gradient(#53d9c5, #38c1b6);
+  color: white;
+}
+.bauthf {
+  background: linear-gradient(#495c6f, #495b6f);
+  color: #919da8;
 }
 </style>
