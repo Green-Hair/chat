@@ -1,67 +1,54 @@
 <template>
-  <div class="fixed z-10 inset-0" id="modal">
-    <div
-      class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0 h-full"
-    >
-      <!-- 背景 -->
-      <div class="fixed inset-0 transition-opacity">
-        <div
-          class="absolute inset-0"
-          style="background: linear-gradient(#ed8792, #a84660)"
-        ></div>
-      </div>
-
-      <!-- 零宽空格 -->
-      <span class="hidden sm:inline-block sm:align-middle sm:h-screen"
-        >&#8203;</span
-      >
-
+  <div class="flex justify-center items-center h-screen">
+    <!-- 背景 -->
+    <div class="fixed inset-0 transition-opacity">
       <div
-        class="inline-block align-bottom text-left shadow-2xl transform transition-all sm:align-middle w-3/4 h-5/6"
-      >
-        <div class="flex h-full auth">
-          <!-- 特性轮播组件 -->
-          <FeatureCard class="w-1/2 h-full rounded-tl-xl rounded-bl-xl" />
-          <!-- 登录注册组件 -->
-          <div class="w-1/2 rounded-tr-xl rounded-br-xl authb">
-            <div class="text-white my-5 mr-5 text-right">
-              <button
-                @click.prevent="tab = 'login'"
-                class="px-5 py-1 rounded-l-full"
-                :class="tab == 'login' ? 'bauth' : 'bauthf'"
-              >
-                登录
-              </button>
-              <button
-                @click.prevent="tab = 'register'"
-                class="px-5 py-1 rounded-r-full"
-                :class="tab == 'register' ? 'bauth' : 'bauthf'"
-              >
-                注册
-              </button>
-            </div>
-            <div class="text-white mt-12 mb-10 flex items-baseline px-16">
-              <div
-                class="text-2xl"
-                :class="
-                  tab == 'login' ? 'border-b sauth' : 'border-none  tauth'
-                "
-              >
-                Sign In
-              </div>
-              <div class="mx-4 tauth">Or</div>
-              <div
-                class="text-2xl"
-                :class="
-                  tab == 'register' ? 'border-b sauth' : 'border-none tauth'
-                "
-              >
-                Sign Up
-              </div>
-            </div>
-            <LoginForm v-if="tab === 'login'" />
-            <RegisterForm v-else />
+        class="absolute inset-0"
+        style="background: linear-gradient(#ed8792, #a84660)"
+      ></div>
+    </div>
+
+    <div class="shadow-2xl w-3/4 h-5/6 auth">
+      <div class="flex h-full auth">
+        <!-- 特性轮播组件 -->
+        <FeatureCard class="w-1/2 h-full rounded-tl-xl rounded-bl-xl" />
+        <!-- 登录注册组件 -->
+        <div class="w-1/2 rounded-tr-xl rounded-br-xl authb">
+          <div class="text-white my-5 mr-5 text-right">
+            <button
+              @click.prevent="tab = 'login'"
+              class="px-5 py-1 rounded-l-full"
+              :class="tab == 'login' ? 'bauth' : 'bauthf'"
+            >
+              登录
+            </button>
+            <button
+              @click.prevent="tab = 'register'"
+              class="px-5 py-1 rounded-r-full"
+              :class="tab == 'register' ? 'bauth' : 'bauthf'"
+            >
+              注册
+            </button>
           </div>
+          <div class="text-white my-8 flex items-baseline px-16">
+            <div
+              class="text-2xl"
+              :class="tab == 'login' ? 'border-b sauth' : 'border-none  tauth'"
+            >
+              Sign In
+            </div>
+            <div class="mx-4 tauth">Or</div>
+            <div
+              class="text-2xl"
+              :class="
+                tab == 'register' ? 'border-b sauth' : 'border-none tauth'
+              "
+            >
+              Sign Up
+            </div>
+          </div>
+          <LoginForm v-if="tab === 'login'" />
+          <RegisterForm @change-tab="tab = 'login'" v-else />
         </div>
       </div>
     </div>

@@ -1,6 +1,10 @@
 <template>
-  <div class="px-16">
-    <vee-form :validation-schema="loginSchema">
+  <div class="px-16 h-2/3 absolute top-25 w-full flex items-center">
+    <vee-form
+      :validation-schema="loginSchema"
+      @submit="login"
+      class="w-4/5 h-full flex flex-col justify-around"
+    >
       <!-- id -->
       <div class="mb-3">
         <label class="inline-block mb-2 text-white">ID</label>
@@ -33,7 +37,7 @@
           placeholder="输入邮箱"
         />
         <button
-          class="text-white absolute top-1/2 left-2/3"
+          class="text-white absolute top-9 right-0 text-right"
           @click.prevent="sendLogin"
         >
           发送验证码
@@ -51,10 +55,21 @@
         />
         <ErrorMessage class="text-red-600" name="wait_number" />
       </div>
+      <button
+        class="py-2 rounded-full text-white w-2/5"
+        style="background: linear-gradient(#63d6c4, #4dc0b6)"
+        type="submit"
+        :disabled="login_in_submission"
+      >
+        登&nbsp;&nbsp;&nbsp;录
+      </button>
     </vee-form>
   </div>
 </template>
 <script lang="ts">
+import { useUserStore, type ILogin } from "@/stores/user";
+import { mapActions } from "pinia";
+
 export default {
   name: "LoginForm",
   data() {
@@ -65,10 +80,20 @@ export default {
         captcha: "required|min:3|max:100|captcha",
         wait_number: "required|min:4|max:6",
       },
+      login_in_submission: false,
     };
   },
   methods: {
+    ...mapActions(useUserStore, ["authenticate"]),
+
+    // 发送登录验证码
     sendLogin: () => {},
+
+    // 登录
+    async login(values: ILogin) {
+      this.login_in_submission = true;
+      await this.authenticate(values);
+    },
   },
 };
 </script>
