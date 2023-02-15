@@ -20,16 +20,16 @@ export default {
     defineRule("captcha", email);
 
     configure({
-      generateMessage: () => {
-        // TODO: Custom ErrorMessage
-
-        /* const messages = {
+      generateMessage: (ctx) => {
+        const messages: any = {
           id: `请输入正确的用户id`,
+          name: `请输入正确的用户名`,
           psw: `请输入正确的密码格式`,
           captcha: `请输入正确的邮箱格式`,
           wait_number: `请输入验证码`,
-        }; */
-        return "格式错误";
+        };
+
+        return messages[ctx.field] ? messages[ctx.field] : "未知错误";
       },
       validateOnBlur: true,
       validateOnChange: true,
