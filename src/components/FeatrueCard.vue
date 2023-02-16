@@ -1,35 +1,97 @@
 <template>
-  <div class="feac">
-    <div class="feacPic">
-    <img src="./feacPic1" alt="图片1" id="pic1"/>
-    <img src="./feacPic2" alt="图片2" id="pic2"/>
-    <img src="./feacPic3" alt="图片3" id="pic3"/>
-    <img src="./feacPic4" alt="图片4" id="pic4"/>
-    <img src="./feacPic1" alt="图片1" id="pic5"/>
-  </div>
+  <div class="feac overflow-hidden">
+    <div
+      class="h-full flex overflow-hidden feacPic"
+      :style="{ width: `${width * features.length}px` }"
+    >
+      <div
+        :style="{ width: `${width}px`, background: feature.src }"
+        class="flex justify-center items-center"
+        v-for="feature in features"
+        :key="feature.id"
+      >
+        {{ feature.id }}
+      </div>
+    </div>
   </div>
 </template>
-<style type="text/css">
+
+<script lang="ts">
+interface IFeature {
+  id: string;
+  src: string;
+}
+let features: IFeature[];
+
+export default {
+  name: "FeatureCard",
+  data() {
+    return {
+      features: features,
+      // 卡片最小宽度323px
+      width: 323,
+    };
+  },
+  beforeCreate: function () {
+    features = [
+      {
+        id: "1",
+        src: "#dfe6e9",
+      },
+      {
+        id: "2",
+        src: "#a29bfe",
+      },
+      {
+        id: "3",
+        src: "#74b9ff",
+      },
+      {
+        id: "4",
+        src: "#81ecec",
+      },
+      {
+        id: "5",
+        src: "#55efc4",
+      },
+    ];
+  },
+  mounted: function () {
+    this.width = document.querySelector(".feac")!.clientWidth;
+    window.onresize = () => {
+      this.width = document.querySelector(".feac")!.clientWidth;
+    };
+  },
+};
+</script>
+
+<style scoped>
 @keyframes feacMove {
-			0%,9% {transform: translateX(0px);}
-			16%,34% {transform: translateX(-600px);}
-			41%,59% {transform: translateX(-1200px);}
-			66%,84% {transform: translateX(-1800px);}
-			91%,100% {transform: translateX(-2400px);}
-		}
-  .feac{
-  width: 600px;
-  height: 629px;
+  0%,
+  20% {
+    left: 0%;
+  }
+  30%,
+  40% {
+    left: -100%;
+  }
+  50%,
+  60% {
+    left: -200%;
+  }
+  70%,
+  80% {
+    left: -300%;
+  }
+  90%,
+  100% {
+    left: -400%;
+  }
+}
+.feac {
   background: linear-gradient(#6de1ca, #54c5b9);
-  overflow: hidden;
-  margin: 0 auto;
-		}
-		div.feacPic {
-			animation: feacMove 8s ease infinite normal;
-			width: 3000px;
-			transform:translateX(0px);
-		}
-		div.feacPic img {
-			float: left;
-		}
+}
+.feacPic {
+  animation: feacMove 8s ease infinite normal;
+}
 </style>
