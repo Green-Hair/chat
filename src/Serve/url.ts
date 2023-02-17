@@ -2,6 +2,8 @@ export default{
 
     baseUrl: '/api',
 
-    detail: '/detail'
+    detail: '/detail',
+
+    posts: '/posts'
 
 }

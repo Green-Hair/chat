@@ -10,4 +10,8 @@ export default class Methods{
     public async detail<T>(data: any): Promise<T | string>{
         return this.request.get(url.detail,data)
     }
+    
+    public async posts<T>(data:any): Promise<T | string>{
+        return this.request.post(url.posts,data)
+    }
 }

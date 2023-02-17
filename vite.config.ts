@@ -14,7 +14,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://pokemon.fantasticmao.cn/pokemon', 
+        target: 'https://jsonplaceholder.typicode.com', 
         changeOrigin: true, 
         rewrite: (path) => path.replace(/^\/api/, ""),
           //重写路径,替换/api

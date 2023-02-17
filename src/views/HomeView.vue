@@ -7,7 +7,6 @@
 import AppHeader from "@/components/AppHeader.vue";
 import TheWelcome from "../components/TheWelcome.vue";
 import Methods from "@/Serve/methods"
-import type {Detail} from "@/Serve/Type";
 
 import { onMounted, onUpdated, onUnmounted } from 'vue';
 export default {
@@ -19,8 +18,10 @@ export default {
     onMounted(() => {
       const http = new Methods();
   http
-    .detail<any>({
-      index:1
+    .posts<any>({
+       title: 'foo',
+      body: 'bar',
+      userId: 1,
     })
     .then(function(res) {
       console.log(res)

@@ -37,20 +37,15 @@ export default class Request {
                 method,
                 headers: {
                     accept: "*",
-                    "content-type" : "aplication/json",
+                    "content-type" : "application/json; charset=UTF-8",
                 },
+                mode:"cors",
     
-                body: data && JSON.stringify(data)
+                body: JSON.stringify(data)
             })
             .then(async res => {
                 const data = await res.json();
-                switch(data.code){
-                    case 200:
-                        return data;
-                    case 404:
-                        return 0;
-                    //状态码判断
-                }
+                return data;
             })
             .catch(err => {
                 const tempErr = err.toString();
