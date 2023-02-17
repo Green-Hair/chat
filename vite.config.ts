@@ -11,4 +11,14 @@ export default defineConfig({
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://pokemon.fantasticmao.cn/pokemon', 
+        changeOrigin: true, 
+        rewrite: (path) => path.replace(/^\/api/, ""),
+          //重写路径,替换/api
+      }
+    }
+  }
 });
