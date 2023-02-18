@@ -91,8 +91,14 @@ export default {
 
     // 登录
     async login(values: ILogin) {
-      this.login_in_submission = true;
-      await this.authenticate(values);
+      await this.authenticate(values).then((msg) => {
+        if (msg!.status === 200) {
+          this.$router.push({ name: "chat" });
+          this.login_in_submission = true;
+        } else {
+          alert(msg.message);
+        }
+      });
     },
   },
 };

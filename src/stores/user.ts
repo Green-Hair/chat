@@ -1,3 +1,4 @@
+import { createUser, userLogin } from "@/includes/fetcher";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 
@@ -18,17 +19,25 @@ export const useUserStore = defineStore("user", () => {
 
   // 用户注册
   const register = async (values: IRegister) => {
-    console.log(values);
-
-    console.log("注册");
+    const { status, msg } = await createUser(values);
+    if (status === 200) {
+      return { status, message: "注册成功" };
+    } else {
+      return { status, message: msg };
+    }
   };
 
   // 用户登录
   const authenticate = async (values: ILogin) => {
-    console.log(values);
-
-    console.log("登录");
-    userLoggedIn.value = true;
+    const { status, msg } = await userLogin(values);
+    if (status === 200) {
+      userLoggedIn.value = true;
+      return { status, message: "登录成功" };
+    } else if (status === 401) {
+      return { status, message: "登录失败, 密码错误" };
+    } else {
+      return { status, message: msg };
+    }
   };
 
   // 用户登出

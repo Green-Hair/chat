@@ -100,10 +100,15 @@ export default {
 
     // 注册
     async register(values: IRegister) {
-      this.reg_in_submission = true;
-      await this.createUser(values);
-      // 注册成功后刷新页面
-      // window.location.reload();
+      await this.createUser(values).then((msg) => {
+        if (msg!.status === 200) {
+          this.reg_in_submission = true;
+          // 注册成功后刷新页面
+          window.location.reload();
+        } else {
+          alert(msg.message);
+        }
+      });
     },
   },
 };
