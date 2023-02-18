@@ -83,7 +83,7 @@ export default {
     return {
       registerSchema: {
         name: "required|min:1|max:100",
-        psw: "required|min:1|max:100",
+        psw: "required|min:8|max:100",
         captcha: "required|min:3|max:100|captcha",
         wait_number: "required|min:4|max:6",
       },
