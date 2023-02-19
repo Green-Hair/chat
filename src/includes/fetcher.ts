@@ -1,3 +1,4 @@
+import { ChatAPIs } from "./ChatAPIs";
 import type {
   ILoginForm,
   IMessage,
@@ -67,9 +68,9 @@ function xfetch(url: string, options?: IRequestOptions) {
 function createUser(form: IRegisterForm): Promise<IMessage> {
   return new Promise((resolve, reject) => {
     xfetch(
-      `http://${import.meta.env.VITE_DOMAIN}:${
-        import.meta.env.VITE_HOST
-      }/users/api/createUser`,
+      `http://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_HOST}${
+        ChatAPIs.UserRegister
+      }`,
       {
         method: "post",
         body: JSON.stringify(form),
@@ -92,9 +93,9 @@ function createUser(form: IRegisterForm): Promise<IMessage> {
 function userLogin(form: ILoginForm): Promise<IMessage> {
   return new Promise((resolve, reject) => {
     xfetch(
-      `http://${import.meta.env.VITE_DOMAIN}:${
-        import.meta.env.VITE_HOST
-      }/users/api/userLogin`,
+      `http://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_HOST}${
+        ChatAPIs.UserLogin
+      }`,
       {
         method: "post",
         body: JSON.stringify(form),
