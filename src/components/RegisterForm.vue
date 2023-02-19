@@ -35,12 +35,15 @@
           name="captcha"
           class="block w-full py-1.5 text-white transition duration-500 border-b bg-transparent outline-none"
           placeholder="输入邮箱"
+          v-model="userEmail"
+          :disabled="emailSendStatus"
         />
         <button
           class="text-white absolute top-9 right-0 text-right"
           @click.prevent="sendRegister"
+          :disabled="emailSendStatus"
         >
-          发送验证码
+          {{ emailContent }}
         </button>
         <ErrorMessage class="text-red-600" name="captcha" />
       </div>
@@ -74,6 +77,9 @@
   </div>
 </template>
 <script lang="ts">
+import { ChatAPIs } from "@/includes/ChatAPIs";
+import { xfetch } from "@/includes/fetcher";
+import type { IMessage } from "@/includes/IFetcher";
 import { useUserStore, type IRegister } from "@/stores/user";
 import { mapActions } from "pinia";
 
@@ -87,7 +93,10 @@ export default {
         captcha: "required|min:3|max:100|captcha",
         wait_number: "required|min:4|max:6",
       },
+      userEmail: "",
+      emailSendStatus: false,
       reg_in_submission: false,
+      emailContent: "发送验证码",
     };
   },
   methods: {
@@ -96,7 +105,30 @@ export default {
     }),
 
     // 发送注册验证码
-    sendRegister: () => {},
+    async sendRegister() {
+      this.emailSendStatus = true;
+      const { status } = (await xfetch(
+        `http://${import.meta.env.VITE_DOMAIN}:${import.meta.env.VITE_HOST}${
+          ChatAPIs.RegisterEmail
+        }`,
+        {
+          method: "POST",
+          body: JSON.stringify({ captcha: this.userEmail }),
+        }
+      )) as IMessage;
+      if (status == 201) {
+        let time = 60;
+        let tCal = setInterval(() => {
+          if (time <= 0) {
+            this.emailContent = `发送验证码`;
+            (this.emailSendStatus = false), clearInterval(tCal);
+          } else {
+            time--;
+            this.emailContent = `请${time}秒后重试`;
+          }
+        }, 1000);
+      }
+    },
 
     // 注册
     async register(values: IRegister) {
