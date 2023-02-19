@@ -1,6 +1,8 @@
 <template>
-  <AppHeader />
-  <TheWelcome />
+  <div>
+    <AppHeader />
+    <TheWelcome />
+  </div>
 </template>
 
 <script lang="ts">
