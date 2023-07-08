@@ -5,7 +5,15 @@ module.exports = {
     './src/**/*.{vue,js,ts,jsx,tsx}'
   ],
   theme: {
-    extend: {}
+    extend: {
+      "colors":{
+        'nav-item-text':'#333',
+        'nav-item-hover':'rgba(0, 0, 0, 0.06)'
+      },
+      "screens":{
+        'mobile':'800px'
+      },
+    }
   },
   plugins: []
 }

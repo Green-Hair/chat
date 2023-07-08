@@ -1,7 +1,9 @@
 <template>
-  <div>登录</div>
+  <div></div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import MainHeader from '@/views/Home/components/MainHeader.vue'
+</script>
 
 <style scoped></style>
